@@ -21,11 +21,14 @@ inputfile.close();
 
 for (int i=0; i<numbers.size(); i++){
     for (int j=0; j<numbers.size(); j++){
-        sum=0;
-        sum=numbers[i]+numbers[j];
-        if (sum == 2020) {
-            std::cout << numbers[i] << " " << numbers[j] << " " << numbers[i]*numbers[j] << std::endl;
-            goto endloop1; // goto used to break nested loop
+        for (int k=0; k<numbers.size(); k++){
+            sum=0;
+            sum=numbers[i]+numbers[j]+numbers[k];
+            if (sum == 2020) {
+                std::cout << numbers[i] << " " << numbers[j] << " " << numbers[k] << std::endl;
+                std::cout << numbers[i]*numbers[j]*numbers[k] << std::endl;
+                goto endloop1; // goto used to break nested loop
+            };
         };
     };
 };
