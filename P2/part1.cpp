@@ -48,8 +48,6 @@ std::vector<passentry> passwords;
 std::ifstream inputfile;
 inputfile.open("input.txt", std::ios::in);
 
-std::stringstream ss;
-
 while(true){
     std::getline(inputfile, line);
     if(!inputfile) break; // test eof to break
@@ -76,8 +74,10 @@ while(true){
 
 inputfile.close();
 
+int count;
 for (int i=0; i<passwords.size(); i++){
-    if ((countFreq(passwords[i].letter, passwords[i].password) > passwords[i].min) && (countFreq(passwords[i].letter, passwords[i].password) < passwords[i].max)) passwords[i].valid=true;
+    count=countFreq(passwords[i].letter, passwords[i].password);
+    if ((count >= passwords[i].min) && (count <= passwords[i].max)) passwords[i].valid=true;
 };
 
 
@@ -85,6 +85,7 @@ int countValid=0;
 for (int i=0; i<passwords.size(); i++){
     if (passwords[i].valid == true) countValid++;
 };
+
 
 std::cout << countValid << std::endl;
 }
