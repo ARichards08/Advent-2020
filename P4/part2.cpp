@@ -36,7 +36,7 @@ bool byr_test(std::string passport){
 
         int byr_int=stoi(byr);
 
-        if (byr_int>1920 && byr_int<2002) result=true;
+        if (byr_int>=1920 && byr_int<=2002) result=true;
     };
 
     return result;
@@ -50,7 +50,7 @@ bool iyr_test(std::string passport){
         std::string iyr=passport.substr(pos+4, 4);
         int iyr_int=stoi(iyr);
 
-        if (iyr_int>2010 && iyr_int<2020) result=true;
+        if (iyr_int>=2010 && iyr_int<=2020) result=true;
     };    
 
     return result;
@@ -64,7 +64,7 @@ bool eyr_test(std::string passport){
         std::string eyr=passport.substr(pos+4, 4);
         int eyr_int=stoi(eyr);
 
-        if (eyr_int>2020 && eyr_int<2030) result=true;
+        if (eyr_int>=2020 && eyr_int<=2030) result=true;
     };
 
     return result;
@@ -93,7 +93,7 @@ bool hgt_test(std::string passport){
                 short_str=passport.substr(pos, 2);
                 hgt_int=stoi(hgt);
 
-                if ((short_str=="cm" && (hgt_int>150 && hgt_int<193)) || (short_str=="in" && (hgt_int>59 && hgt_int<76))) {
+                if ((short_str=="cm" && (hgt_int>=150 && hgt_int<=193)) || (short_str=="in" && (hgt_int>=59 && hgt_int<=76))) {
                     result=true;
                     break;
                 } else {
@@ -122,7 +122,7 @@ bool hcl_test(std::string passport){
 
             if (hcl[0]!='#') break;
 
-            for (int i=1; i<7; i++){
+            for (int i=1; i<=7; i++){
                 if (isdigit(hcl[i])==false && is_af(hcl[i])==false) break;
             };
 
@@ -165,15 +165,16 @@ bool pid_test(std::string passport){
 
         pos+=+4;
 
-        pid=passport.substr(pos, 9);
+        pid=passport.substr(pos, 10);
 
-        for (int i=0; i<pid.length(); i++){
+        for (int i=0; i<10; i++){
             if (isdigit(pid[i])==true){
                 counter++;
             };
         };
 
-        if (counter==pid.length()) result=true;
+
+        if (counter==9) result=true;
     };
 
     return result;
@@ -251,6 +252,7 @@ entries.push_back(entry);
 inputfile.close();
 
 int valid_pps=0;
+int pos;
 
 for (int i=0; i<entries.size(); i++){
     if (passport_validity(entries[i])==true) {
@@ -260,56 +262,4 @@ for (int i=0; i<entries.size(); i++){
 
 std::cout << valid_pps << std::endl;
 
-std::cout << entries[0] << std::endl;
-
-if (byr_test(entries[0])==true){
-    std::cout << "byr yep" << std::endl;
-} else {
-    std::cout << "byr nope" << std::endl;
-};
-
-if (iyr_test(entries[0])==true){
-    std::cout << "iyr yep" << std::endl;
-} else {
-    std::cout << "iyr nope" << std::endl;
-};
-
-if (eyr_test(entries[0])==true){
-    std::cout << "eyr yep" << std::endl;
-} else {
-    std::cout << "eyr nope" << std::endl;
-};
-
-if (hgt_test(entries[0])==true){
-    std::cout << "hgt yep" << std::endl;
-} else {
-    std::cout << "hgt nope" << std::endl;
-};
-
-if (hcl_test(entries[0])==true){
-    std::cout << "hcl yep" << std::endl;
-} else {
-    std::cout << "hcl nope" << std::endl;
-};
-
-if (ecl_test(entries[0])==true){
-    std::cout << "ecl yep" << std::endl;
-} else {
-    std::cout << "ecl nope" << std::endl;
-};
-
-if (byr_test(entries[0])==true){
-    std::cout << "byr yep" << std::endl;
-} else {
-    std::cout << "byr nope" << std::endl;
-};
-
-if (pid_test(entries[0])==true){
-    std::cout << "pid yep" << std::endl;
-} else {
-    std::cout << "pid nope" << std::endl;
-};
-
-int pos=entries[0].find("byr:");
-std::cout << pos << std::endl;
 }
